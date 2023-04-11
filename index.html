@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <title>Simple Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <script type="module" src="./js/index.js"></script>
+    <script type="module" src="./js/map.js"></script>
+    
+    <!-- ION ICONS -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <!-- STYLE -->
+    <link rel="stylesheet" type="text/css" href="./styles/global.css" />
+</head>
+
+<body>
+    <div id="content">
+        <div id="map"></div>
+
+        <div id="modal-window">
+            <div id="create-event">
+                <button id="close-modal">
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                </button>
+                <input type="text" name="name" id="name-input" placeholder="Nome do evento">
+                <p id="position"></p>
+            </div>
+        </div>
+        
+        <div id="marker-modal">
+            <div id="modal-content">
+                <p id="modal-title"></p>
+                <button id="modal-button">Criar evento</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRETTIER-IGNORE -->
+    <script src="./js/prettier.js"></script>
+</body>
+
+</html>
