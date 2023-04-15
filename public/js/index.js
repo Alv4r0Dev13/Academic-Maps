@@ -1,8 +1,3 @@
-const div = document.querySelector('#create-event'),
-      lat = document.querySelector('#lat'),
-      lng = document.querySelector('#lng');
-
-
 async function listEvents() {
     const response = await fetch("http://localhost:3000/events");
     const jsonData = await response.json();

@@ -3,11 +3,19 @@
 
 <head>
     <title>Simple Map</title>
+    <link rel="shortcut icon" href="./img/icon.png">
+
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     <script type="module" src="./js/index.js"></script>
     <script type="module" src="./js/map.js"></script>
-    
+    <script type="module" src="./js/page_events.js"></script>
+
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+
     <!-- ION ICONS -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -17,25 +25,43 @@
 </head>
 
 <body>
-    <div id="content">
-        <div id="map"></div>
+    <div id="header">
+        <img id="logo" src="./img/logo.png" alt="Academic Maps">
+    </div>
 
-        <div id="modal-window">
-            <div id="create-event">
-                <button id="close-modal">
-                    <ion-icon name="close-circle-outline"></ion-icon>
-                </button>
-                <input type="text" name="name" id="name-input" placeholder="Nome do evento">
-                <p id="position"></p>
+    <div id="content">
+
+        <div id="menu">
+            <div id="menu-coords">
+                <p>Lat: <span id="lat"></span></p>
+                <p>Lng: <span id="lng"></span></p>
             </div>
+            <input type="text" name="event" id="event" placeholder="Nome do evento">
+            <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Descrição do evento"
+                maxlength="600"></textarea>
+            <p id="char-count-display">
+                <span id="char-count"></span><span id="max-char"></span>
+            </p>
+            <button class="button" id="menu-button">Salvar</button>
         </div>
-        
-        <div id="marker-modal">
-            <div id="modal-content">
-                <p id="modal-title"></p>
-                <button id="modal-button">Criar evento</button>
+
+        <div id="map-window">
+
+            <div id="arrow">
+                <ion-icon name="caret-back-outline"></ion-icon>
             </div>
+            <div id="map"></div>
+            <div id="glass"></div>
+
+            <div id="marker-modal">
+                <div id="modal-content">
+                    <p id="modal-title"></p>
+                    <button class="button" id="modal-button">Criar evento</button>
+                </div>
+            </div>
+
         </div>
+
     </div>
 
     <!-- PRETTIER-IGNORE -->
