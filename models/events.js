@@ -13,6 +13,9 @@ const Events = sequelize.define('Events', {
     },
     eventName: {
       type: DataTypes.STRING
+    },
+    Description: {
+      type: DataTypes.STRING
     }
   },
 {});

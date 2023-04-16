@@ -3,7 +3,10 @@ const markerModal = document.getElementById('marker-modal'),
     markerButton = document.getElementById('modal-button'),
     latDisplay = document.getElementById('lat'),
     lngDisplay = document.getElementById('lng'),
-    arrow = document.getElementById('arrow');
+    arrow = document.getElementById('arrow'),
+    eventNameBox = document.getElementById('event'),
+    eventDescriptionBox = document.getElementById('desc'),
+    charCount = document.getElementById('char-count');
 let map;
 
 async function initMap() {
@@ -15,7 +18,7 @@ async function initMap() {
         zoom: 14,
         zoomControl: false,
         fullscreenControl: false,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
     });
 
     let marker = new google.maps.Marker({
@@ -43,39 +46,40 @@ async function initMap() {
         mapShrink();
         latDisplay.innerHTML = marker.getPosition()['lat']();
         lngDisplay.innerHTML = marker.getPosition()['lng']();
+        eventNameBox.value = '';
+        eventDescriptionBox.value = '';
         markerModal.style.display = 'none';
+        charCount.innerText = '0';
     });
 
     arrow.addEventListener('click', () => {
         mapGrow();
-        console.log('click');
     });
+
+    return marker;
 }
 
 initMap();
 
 // MAP ANIMATION
-const mapDisplay = document.getElementById('map'),
+const mapDisplay = document.getElementById('map-window'),
     glass = document.getElementById('glass'),
     modalWin = document.getElementById('marker-modal'),
     eventsMenu = document.getElementById('menu'),
     menuEventName = document.getElementById('event');
 
 function mapShrink() {
-    mapDisplay.style.width = 'calc(70vw - 40px)';
-    glass.style.width = 'calc(70vw - 40px)';
-    modalWin.style.width = 'calc(70vw - 40px)';
-    arrow.style.left = 'calc(30vw + 5px)';
-    setTimeout(() => {
-        eventsMenu.style.zIndex = '5';
-        menuEventName.focus();
-    }, 800);
+    const mapArea = 'calc(100% - (var(--sideBarSize) + var(--mapGap)))';
+    mapDisplay.style.width = mapArea;
+    modalWin.style.width = mapArea;
+    arrow.style.opacity = '1';
 }
 
 function mapGrow() {
-    mapDisplay.style.width = 'calc(100vw - 40px)';
-    glass.removeAttribute('style');
+    mapDisplay.style.width = '100%';
     modalWin.removeAttribute('style');
-    arrow.removeAttribute('style');
+    arrow.style.opacity = '0';
     eventsMenu.removeAttribute('style');
 }
+
+export { initMap };
