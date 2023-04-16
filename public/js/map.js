@@ -10,16 +10,18 @@ const markerModal = document.getElementById('marker-modal'),
 let map;
 
 async function initMap() {
-    //@ts-ignore
-    const { Map } = await google.maps.importLibrary("maps");
+    if (!map) {
+        console.log(map);
+        const { Map } = await google.maps.importLibrary("maps");
 
-    map = new Map(document.getElementById("map"), {
-        center: { lat: -6.88778, lng: -38.55700 },
-        zoom: 14,
-        zoomControl: false,
-        fullscreenControl: false,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-    });
+        map = new Map(document.getElementById("map"), {
+            center: { lat: -6.88778, lng: -38.55700 },
+            zoom: 14,
+            zoomControl: false,
+            fullscreenControl: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+        });
+    }
 
     let marker = new google.maps.Marker({
         position: { lat: -6.88778, lng: -38.55700 },
@@ -56,10 +58,10 @@ async function initMap() {
         mapGrow();
     });
 
-    return marker;
+    return {marker, map};
 }
 
-initMap();
+// initMap();
 
 // MAP ANIMATION
 const mapDisplay = document.getElementById('map-window'),
@@ -82,4 +84,4 @@ function mapGrow() {
     eventsMenu.removeAttribute('style');
 }
 
-export { initMap };
+export { initMap, mapGrow };

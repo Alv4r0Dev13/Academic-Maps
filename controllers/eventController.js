@@ -8,7 +8,7 @@ const listEvents = async (req,res) => {
 const searchByKey = async (req,res) => {
     const event = await Event.findByPk(req.params.id);
     if(!event) {
-        res.status(404).send('Evento não encontrado');
+        res.status(404).send({err: 'Evento não encontrado'});
         return;
     }
     res.status(200).send(event);
@@ -17,31 +17,31 @@ const searchByKey = async (req,res) => {
 const saveEvent = async (req,res) => {
     try {
         const event = await Event.create(req.body);
-        if (event) res.status(201).send('Evento criado');
+        if (event) res.status(201).send({message: 'Evento criado'});
     } catch(error) {
-        res.status(400).send(`Falha ao Salvar! Erro: ${error}`);
+        res.status(400).send({err: `Falha ao Salvar! Erro: ${error}`});
     }    
 }
 
 const deleteEvent = async (req,res) => {
     const event = await Event.findByPk(req.params.id);
     if(!event){
-        res.status(404).send('Evento não encontrado');
+        res.status(404).send({err: 'Evento não encontrado'});
         return;
     }
     await event.destroy();
-    res.status(200).send(`Evento ${req.params.id} excluído`);
+    res.status(200).send({message: `Evento ${req.params.id} excluído`});
 }
 
 const updateEvent = async (req,res) => {
     const event = await Event.findByPk(req.params.id);
     if(!event) {
-        res.status(404).send('Evento não encontrado');
+        res.status(404).send({err: 'Evento não encontrado'});
         return;
     }
     event.set(req.body);
     await event.save();
-    res.status(200).send('Atualizado');
+    res.status(200).send({message: 'Atualizado'});
     
 }
 
