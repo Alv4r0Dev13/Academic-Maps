@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 
 <head>
-    <title>Simple Map</title>
+    <title>Academic Maps</title>
     <link rel="shortcut icon" href="./img/icon.png">
 
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
@@ -36,12 +36,12 @@
                 <p>Lat: <span id="lat"></span></p>
                 <p>Lng: <span id="lng"></span></p>
             </div>
-            <div id="textsinputs">
-                <input type="text" name="event" id="event" placeholder="Nome do evento">
-                <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Descrição do evento"
+            <div id="texts-inputs">
+                <input type="text" name="event" class="text-input" id="event" placeholder="Nome do evento">
+                <textarea name="desc" class="text-input" id="desc" cols="30" rows="10" placeholder="Descrição do evento"
                     maxlength="600"></textarea>
             </div>
-            <div id="boxinfo">
+            <div id="box-info">
                 <p id="char-count-display">
                     <span id="char-count"></span><span id="max-char"></span>
                 </p>
@@ -49,11 +49,40 @@
             <button class="button" id="menu-button">Salvar</button>
         </div>
 
+        <div id="list">
+            <h1 id="list-title">Eventos</h1>
+            <div id="list-search">
+                <input type="text" name="search" class="text-input" id="searchbar">
+                <button class="button icon-btn" id="search-btn">
+                    <ion-icon name="search-outline"></ion-icon>
+                </button>
+            </div>
+            <ul id="list-list">
+                <!-- SAMPLE 
+                <li class="list-event">
+                    <details>
+                        <summary>
+                            <p  class="list-event-name">Evento!</p>
+                            <button class="button icon-btn list-event-btn">
+                                <ion-icon name="location-outline"></ion-icon>
+                            </button>
+                        </summary>
+                        <p class="list-event-desc">Lorem ipsum dolor sit amet consectur adipiscing elit.</p>
+                    </details>
+                </li>
+                -->
+            </ul>
+        </div>
+
         <div id="map-window">
 
-            <div id="arrow">
+            <div class="map-icon" id="arrow">
                 <ion-icon name="caret-back-outline"></ion-icon>
             </div>
+            <div class="map-icon" id="open-list">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+
             <div id="map"></div>
             <div id="glass"></div>
 

@@ -6,7 +6,8 @@ const markerModal = document.getElementById('marker-modal'),
     arrow = document.getElementById('arrow'),
     eventNameBox = document.getElementById('event'),
     eventDescriptionBox = document.getElementById('desc'),
-    charCount = document.getElementById('char-count');
+    charCount = document.getElementById('char-count'),
+    listButton = document.getElementById('open-list');
 let map;
 
 async function initMap() {
@@ -44,21 +45,16 @@ async function initMap() {
         markerTitle.innerHTML = `Posição: ${marker.getPosition()}`;
     });
 
-    markerButton.addEventListener('click', () => {
-        mapShrink();
-        latDisplay.innerHTML = marker.getPosition()['lat']();
-        lngDisplay.innerHTML = marker.getPosition()['lng']();
-        eventNameBox.value = '';
-        eventDescriptionBox.value = '';
-        markerModal.style.display = 'none';
-        charCount.innerText = '0';
+    markerButton.addEventListener('click', () => showCreateEventMenu(marker));
+
+    listButton.addEventListener('click', () => {
+        if (content.hasAttribute('style')) closeEventList();
+        else openEventList();
     });
 
-    arrow.addEventListener('click', () => {
-        mapGrow();
-    });
+    arrow.addEventListener('click', () => mapGrow());
 
-    return {marker, map};
+    return { marker, map };
 }
 
 // initMap();
@@ -68,20 +64,50 @@ const mapDisplay = document.getElementById('map-window'),
     glass = document.getElementById('glass'),
     modalWin = document.getElementById('marker-modal'),
     eventsMenu = document.getElementById('menu'),
-    menuEventName = document.getElementById('event');
+    menuEventName = document.getElementById('event'),
+    content = document.getElementById('content');
+
+async function showCreateEventMenu(marker) {
+    if (content.hasAttribute('style')) {
+        closeEventList();
+        await new Promise(r => setTimeout(r, 500));
+    }
+
+    mapShrink();
+    arrow.style.display = 'block';
+    latDisplay.innerHTML = marker.getPosition().lat();
+    lngDisplay.innerHTML = marker.getPosition().lng();
+    eventNameBox.value = '';
+    eventDescriptionBox.value = '';
+    markerModal.style.display = 'none';
+    listButton.style.display = 'none';
+    charCount.innerText = '0';
+}
 
 function mapShrink() {
-    const mapArea = 'calc(100% - (var(--sideBarSize) + var(--mapGap)))';
+    const mapArea = 'calc(100% - (var(--sideBarSize) + var(--gap)))';
     mapDisplay.style.width = mapArea;
     modalWin.style.width = mapArea;
-    arrow.style.opacity = '1';
 }
 
 function mapGrow() {
-    mapDisplay.style.width = '100%';
+    mapDisplay.removeAttribute('style');
     modalWin.removeAttribute('style');
-    arrow.style.opacity = '0';
+    arrow.removeAttribute('style');
+    listButton.removeAttribute('style');
     eventsMenu.removeAttribute('style');
+}
+
+function openEventList() {
+    content.style.justifyContent = 'left';
+    mapShrink();
+}
+
+function closeEventList() {
+    mapGrow();
+    setTimeout(() => {
+        content.removeAttribute('style');
+    }, 500);
 }
 
 export { initMap, mapGrow };
