@@ -7,12 +7,13 @@ const markerModal = document.getElementById('marker-modal'),
     eventNameBox = document.getElementById('event'),
     eventDescriptionBox = document.getElementById('desc'),
     charCount = document.getElementById('char-count'),
-    listButton = document.getElementById('open-list');
+    listButton = document.getElementById('open-list'),
+    searchBar = document.getElementById('searchbar');
 let map;
 
 async function initMap() {
     if (!map) {
-        console.log(map);
+        // console.log(map);
         const { Map } = await google.maps.importLibrary("maps");
 
         map = new Map(document.getElementById("map"), {
@@ -107,6 +108,7 @@ function closeEventList() {
     mapGrow();
     setTimeout(() => {
         content.removeAttribute('style');
+        searchBar.value = '';
     }, 500);
 }
 

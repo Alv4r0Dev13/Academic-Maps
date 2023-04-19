@@ -76,6 +76,8 @@ p {
     height: 100%;
     width: 100%;
     transition: width 0.5s ease-in-out;
+    background-color: #e1edf2;
+    border-radius: 20px;
 }
 
 .map-icon {
@@ -260,9 +262,10 @@ p {
 /* EVENT LIST */
 
 #list-title {
-    font-size: 3.5rem;
+    font-size: 3rem;
     text-align: center;
     margin: 0;
+    font-weight: 100;
 }
 
 #open-list {
@@ -278,6 +281,8 @@ p {
     right: 0;
     height: 100%;
     width: var(--sideBarSize);
+    display: flex;
+    flex-direction: column;
 }
 
 #list-search {
@@ -285,28 +290,46 @@ p {
     justify-content: space-between;
     width: 100%;
     margin: 2rem 0;
+    align-items: center;
 }
 
 #searchbar {
-    width: calc(100% - 8rem);
+    width: 100%;
+    padding-left: 5rem;
+}
+
+#searchIconIcon {
+    width: 2rem;
+    height: 2rem;
+}
+
+#searchIcon {
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
 }
 
 #search-btn {
-    padding: 10px;
-    width: 6rem;
+    /* padding: 10px;
+    width: 6rem; */
 }
 
 #list-list {
     width: 100%;
-    margin: 4rem 0;
+    margin: 0;
     padding: 0;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .list-event {
     background-color: white;
     border-radius: 2rem;
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
-    margin: 2rem 0;
+    margin: 2rem 7px;
     list-style: none;
     font-size: 2rem;
 }
